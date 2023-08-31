@@ -1,8 +1,8 @@
 # Vidmedia frontend
 
 ### Frameworks used:
-* Vue.js
-* Tailwindcss
+- Vue.js
+- Tailwindcss
 
 
 ### features:
