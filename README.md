@@ -1,2 +1,15 @@
-# vidmedia-frontend
-Video media frontend(created using vue.js and tailwindcss) allow users to list videos, delete video and subtitle, upload video and create subtitle.
+# Vidmedia frontend
+
+### Frameworks used:
+* Vue.js
+* Tailwindcss
+
+
+### features:
+- List videos
+- Upload video
+- Delete video
+- Play video
+- Create subtitles through video player
+- Sync subtitles with video
+- Delete subtitle
