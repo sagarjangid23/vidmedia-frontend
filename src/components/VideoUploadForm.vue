@@ -60,7 +60,7 @@ export default {
                 formData.append('title', this.formData.title);
                 formData.append('video_file', this.formData.video_file);
 
-                const response = await axios.post(getAbsoluteUrl("videos"), this.formData, {
+                const response = await axios.post(getAbsoluteUrl("/api/videos/"), this.formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     },

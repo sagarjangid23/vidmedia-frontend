@@ -93,14 +93,14 @@ export default {
         };
     },
     async mounted() {
-        await axios.get(getAbsoluteUrl("videos"))
+        await axios.get(getAbsoluteUrl("/api/videos/"))
             .then(response => {
                 this.videos = response.data.data;
             })
             .catch(error => {
                 console.error('Error fetching videos:', error);
             }
-        );
+            );
     },
     methods: {
         getAbsoluteUrl,
@@ -140,7 +140,7 @@ export default {
         },
         async deleteVideo(videoId) {
             try {
-                await axios.delete(getAbsoluteUrl(getAbsoluteUrl(`videos/${videoId}`)));
+                await axios.delete(getAbsoluteUrl(`/api/videos/${videoId}/`));
                 // Update the videos array after successful deletion
                 this.videos = this.videos.filter(video => video.id !== videoId);
             } catch (error) {
@@ -161,7 +161,7 @@ export default {
         },
         async deleteSubtitle(videoId, subtitleId) {
             try {
-                await axios.delete(getAbsoluteUrl(`subtitles/${subtitleId}`));
+                await axios.delete(getAbsoluteUrl(`/api/subtitles/${subtitleId}/`));
                 // Update the videos array after successful subtitle deletion
                 this.videos = this.videos.map(video => {
                     if (video.id === videoId) {
@@ -179,5 +179,4 @@ export default {
 </script>
 
 
-<style scoped>
-</style>
+<style scoped></style>
