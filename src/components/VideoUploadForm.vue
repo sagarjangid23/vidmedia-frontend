@@ -32,6 +32,7 @@
 
 <script>
 import axios from 'axios';
+import { getAbsoluteUrl } from '../utils';
 
 export default {
     data() {
@@ -44,6 +45,8 @@ export default {
         };
     },
     methods: {
+        getAbsoluteUrl,
+
         handleFileChange(event) {
             this.formData.video_file = event.target.files[0];
         },
@@ -57,7 +60,7 @@ export default {
                 formData.append('title', this.formData.title);
                 formData.append('video_file', this.formData.video_file);
 
-                const response = await axios.post('http://127.0.0.1:8000/api/videos/', this.formData, {
+                const response = await axios.post(getAbsoluteUrl("videos"), this.formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     },
@@ -71,7 +74,6 @@ export default {
                     // Handle API validation errors
                     if (error.response.status === 422) {
                         this.errors = error.response.data.data.message;
-                        console.log(this.errors)
                     } else {
                         // Handle other API errors
                         console.error('API Error:', error.response.data.message);

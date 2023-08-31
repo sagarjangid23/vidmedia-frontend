@@ -75,7 +75,8 @@
 <script>
 import axios from 'axios';
 import VideoPlayerModal from "./VideoPlayerModal.vue";
-import VideoUploadForm from './VideoUploadform.vue';
+import VideoUploadForm from './VideoUploadForm.vue';
+import { getAbsoluteUrl } from '../utils';
 
 
 export default {
@@ -92,10 +93,9 @@ export default {
         };
     },
     async mounted() {
-        await axios.get(`http://127.0.0.1:8000/api/videos/`)
+        await axios.get(getAbsoluteUrl("videos"))
             .then(response => {
                 this.videos = response.data.data;
-                console.log("videos: ", this.videos)
             })
             .catch(error => {
                 console.error('Error fetching videos:', error);
@@ -103,6 +103,8 @@ export default {
         );
     },
     methods: {
+        getAbsoluteUrl,
+
         // Video player
         openVideoPlayerModal(video) {
             this.selectedVideo = video;
@@ -138,7 +140,7 @@ export default {
         },
         async deleteVideo(videoId) {
             try {
-                await axios.delete(`http://127.0.0.1:8000/api/videos/${videoId}/`);
+                await axios.delete(getAbsoluteUrl(getAbsoluteUrl(`videos/${videoId}`)));
                 // Update the videos array after successful deletion
                 this.videos = this.videos.filter(video => video.id !== videoId);
             } catch (error) {
@@ -159,7 +161,7 @@ export default {
         },
         async deleteSubtitle(videoId, subtitleId) {
             try {
-                await axios.delete(`http://127.0.0.1:8000/api/subtitles/${subtitleId}/`);
+                await axios.delete(getAbsoluteUrl(`subtitles/${subtitleId}`));
                 // Update the videos array after successful subtitle deletion
                 this.videos = this.videos.map(video => {
                     if (video.id === videoId) {

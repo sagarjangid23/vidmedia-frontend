@@ -170,7 +170,7 @@ export default {
         // Fetch languages
         async fetchLanguages() {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/api/languages/');
+                const response = await axios.get(getAbsoluteUrl("languages"));
                 this.languages = response.data.data;
             } catch (error) {
                 if (error.response) {
@@ -244,7 +244,7 @@ export default {
             };
             try {
                 // Send subtitleData to your API
-                const response = await axios.post('http://127.0.0.1:8000/api/subtitles/', subtitleData);
+                const response = await axios.post(getAbsoluteUrl("subtitles"), subtitleData);
 
                 const language = this.languages.find(lang => lang.id === this.selectedLanguageIdForSubtitle);
 
