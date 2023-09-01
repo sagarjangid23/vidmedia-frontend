@@ -18,9 +18,15 @@
                         {{ errors.video_file[0] }}
                     </div>
                 </div>
-                <button type="submit"
+                <button type="submit" :disabled="isUploading"
                     class="w-full mt-4 py-1.5 bg-green-500 rounded-lg text-white hover:bg-green-600">
-                    Upload
+                    
+                    <span v-if="isUploading">
+                        Uploading Video <i  class="fa-solid fa-spinner fa-spin-pulse fa-lg"></i>
+                    </span>
+                    <span v-else>
+                        Upload Video <i  class="fa-solid fa-upload"></i>
+                    </span>                    
                 </button>
             </form>
             <button @click="closeUploadForm" class="w-full mt-2 py-1.5 bg-red-500 rounded-lg text-white hover:bg-red-700">
@@ -41,7 +47,8 @@ export default {
                 title: '',
                 video_file: null,
             },
-            errors: {}
+            errors: {},
+            isUploading: false,
         };
     },
     methods: {
@@ -54,6 +61,7 @@ export default {
         async uploadVideo() {
             // Clear previous errors
             this.errors = {};
+            this.isUploading = true; // Show loading spinner during submission
 
             try {
                 const formData = new FormData();
@@ -65,11 +73,15 @@ export default {
                         'Content-Type': 'multipart/form-data'
                     },
                 });
+                // Reset upload state when submission is complete
+                this.isUploading = false;
+
                 // Emit the uploaded video and reset form data
                 this.$emit('videoUploaded', response.data);
                 this.formData.title = '';
                 this.formData.video_file = null;
             } catch (error) {
+                this.isUploading = false; // Handle error and hide loading spinner
                 if (error.response) {
                     // Handle API validation errors
                     if (error.response.status === 422) {

@@ -9,7 +9,7 @@
             </span>
             <button @click="openUploadForm"
                 class="mr-10 px-3 py-1 bg-blue-700 rounded-lg text-sm text-gray-100 hover:bg-blue-800 transition duration-500 transform hover:scale-110">
-                Upload Video <i class="fa-solid fa-upload"></i>
+                Upload Video <i class="fa-solid fa-square-plus"></i>
             </button>
         </header>
 
