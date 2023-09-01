@@ -3,7 +3,8 @@
         <div class="absolute inset-0 bg-gray-900 opacity-70"></div>
         <div class="relative bg-gray-800 ring ring-gray-800 shadow-xl px-2 pb-2 rounded-lg w-3/5">
             <div class="flex items-center justify-end py-2">
-                <button id="subtitleOpenElement" @click="openSubtitleForm(selectedVideo.id)" class="bg-orange-400 hover:bg-orange-500 rounded-md px-1 text-sm my-0 py-0 mr-4 transition duration-500 transform hover:scale-105">
+                <button id="subtitleOpenElement" @click="openSubtitleForm(selectedVideo.id)"
+                    class="bg-orange-400 hover:bg-orange-500 rounded-md px-1 text-sm my-0 py-0 mr-4 transition duration-500 transform hover:scale-105">
                     <i class="fa-solid fa-closed-captioning"></i> New Subtitle
                 </button>
                 <button class="text-gray-400 mr-0.5" @click="closeVideoPlayerModal">
@@ -12,8 +13,8 @@
             </div>
             <div class="border-2 border-gray-700">
                 <div id="videoElement" class="video-container">
-                    <video id="video_id" :src="getAbsoluteUrl(selectedVideo.video_file)" crossorigin="anonymous" class="video-player" controls
-                        preload="auto">
+                    <video id="video_id" :src="getAbsoluteUrl(selectedVideo.video_file)" crossorigin="anonymous"
+                        class="video-player" controls autoplay loop preload="auto">
                         <track v-for="(subtitle, index) in selectedVideo.subtitle_files" :key="index"
                             :src="getAbsoluteUrl(subtitle.link)" :label="subtitle.language" :srclang="subtitle.code"
                             kind="subtitles">
@@ -152,18 +153,18 @@ export default {
             this.selectedVideoIdForSubtitle = null;
             this.selectedLanguageIdForSubtitle = null;
             this.showSubtitleForm = false;
-            this.title = '',
-            this.subtitles = [],
+            this.title = '';
+            this.subtitles = [];
             this.formData = {
                 start_time: '00:00:00.000',
                 end_time: '00:00:00.000',
-                text: '',
+                text: ''
             };
 
             // Update the padding-bottom property using inline style
             var openElement = document.getElementById("subtitleOpenElement");
             var element = document.getElementById("videoElement");
-            
+
             openElement.classList.remove("hidden")
             element.style.paddingBottom = "56.25%"; /* 16:9 aspect ratio */
         },
